@@ -1,16 +1,16 @@
 import React from "react";
 
-export default function AdminSideBarUl() {
+export default function OrganSideBarUl() {
   return (
     <ul className="nav flex-column mt-5">
       <li className="nav-item">
-        <a className="nav-link text-light" href="/admin/home">
+        <a className="nav-link text-light" href="/organisation/home">
         <i class="fa-solid fa-desktop"></i> DashBoard
         </a>
       </li>
       <li className="nav-item">
-        <a className="nav-link text-light" href="/admin/organisation/register">
-        <i class="fa-solid fa-plus"></i> Add Organisation
+        <a className="nav-link text-light" href="/organisation/add/post">
+        <i class="fa-solid fa-plus"></i> Add Post
         </a>
       </li>
       <li className="nav-item">

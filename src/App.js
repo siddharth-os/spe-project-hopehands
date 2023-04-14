@@ -6,6 +6,11 @@ import UserRegistration from './component/userRegistration';
 import OrganisationRegister from './component/organisationRegister';
 import AdminHome from './component/adminHome';
 import AddPost from './component/addPost';
+import OrganInfoCard from './component/organInfoCard';
+import Footer from './component/footer';
+import OrganHome from './component/organHome';
+import OrganPost from './component/organPost';
+import UserHome from './component/userHome';
 function App() {
   return (
     <div className="App">
@@ -16,9 +21,14 @@ function App() {
         <Route path="/user/registration" element={<UserRegistration/>}/>
         <Route path="/admin/home" element={<AdminHome/>}/>
         <Route path="/admin/organisation/register" element={<OrganisationRegister/>}/>
-        <Route path="/organisation/id/add/post" element={<AddPost/>}/>
+        <Route path="/admin/organisation/id" element={<OrganInfoCard/>}/>
+        <Route path="/organisation/home" element={<OrganHome/>}/>
+        <Route path="/organisation/add/post" element={<AddPost/>}/>
+        <Route path="/organisation/post/id" element={<OrganPost/>}/>
+        <Route path="user/home" element={<UserHome/>}/>
         </Routes>
-      </Router> 
+      </Router>
+      <Footer/> 
     </div>
   );
 }
