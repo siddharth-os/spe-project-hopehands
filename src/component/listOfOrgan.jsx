@@ -1,7 +1,25 @@
-import React from "react";
-
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { getToken, url } from "../services/auth";
+import { Link } from "react-router-dom";
 export default function ListOfOrgan() {
-    const l=[1,21,1,1,1,1,1,1,1,1,1];
+    const [listOrgs,setListOrgs]=useState([]);
+    const navigate = useNavigate("");
+    useEffect(()=>{
+        const fetchList = async()=>{
+            const token = getToken();
+            try {
+                const res = await (await axios.post(url+"/org/getall",{},{headers:{'Authorization':token}}));
+                // console.log(res.data);
+                setListOrgs(res.data);
+            } catch (error) {
+                console.log(error);
+                navigate("/");
+            }
+        }
+        fetchList();
+    },[])
   return (
     <div className="col-md-10 " style={{ margin: "1rem auto" }}>
       <h2
@@ -18,17 +36,19 @@ export default function ListOfOrgan() {
         <table class="table table-bordered">
           <thead>
             <tr>
-              <th>Uid</th>
-              <th>Name</th>
+              <th>#</th>
+              <th>Oid</th>
+              <th>Email</th>
               <th>More Info</th>
             </tr>
           </thead>
           <tbody>
-            {l.map((ele,index)=>{
+            {listOrgs.map((ele,index)=>{
                 return(<tr>
-                    <td>JOU121KK</td>
-                    <td>Drishti Old Age Home</td>
-                    <td><a href="/admin/organisation/id">More Info</a></td>
+                    <td>{index+1}</td>
+                    <td>{ele.oid}</td>
+                    <td>{ele.email}</td>
+                    <td><Link to={`/admin/organisation/${listOrgs[index].oid}`}>More Info</Link></td>
                   </tr>)
             })}
           </tbody>

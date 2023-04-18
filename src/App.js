@@ -22,7 +22,7 @@ function App() {
         <Route path="/user/registration" element={<UserRegistration/>}/>
         <Route path="/admin/home" element={<AdminHome/>}/>
         <Route path="/admin/organisation/register" element={<OrganisationRegister/>}/>
-        <Route path="/admin/organisation/id" element={<OrganInfoCard/>}/>
+        <Route path="/admin/organisation/:id" element={<OrganInfoCard/>}/>
         <Route path="/organisation/home" element={<OrganHome/>}/>
         <Route path="/organisation/add/post" element={<AddPost/>}/>
         <Route path="/organisation/post/id" element={<OrganPost/>}/>

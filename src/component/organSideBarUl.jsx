@@ -19,8 +19,8 @@ export default function OrganSideBarUl() {
         </a>
       </li>
       <li className="nav-item">
-        <a className="nav-link text-light" href="#">
-        <i class="fa-solid fa-right-from-bracket"></i> Logout
+        <a className="nav-link text-light" href="/logout">
+        <i className="fa-solid fa-right-from-bracket"></i> Logout
         </a>
       </li>
     </ul>

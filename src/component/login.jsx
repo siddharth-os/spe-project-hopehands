@@ -41,7 +41,15 @@ export default function Login() {
       console.log("successfully loggedIn");
       localStorage.setItem('jwtToken',result.data);
       localStorage.setItem('authRole',role);
-      navigate("/admin/home");
+      if(role===0){
+        navigate("/admin/home");
+      }
+      else if(role===1){
+        navigate("/organisation/home")
+      }
+      else{
+        navigate("/user/home");
+      }
     }
     else{
       console.log("herer");

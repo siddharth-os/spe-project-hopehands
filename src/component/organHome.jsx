@@ -1,11 +1,19 @@
 import { Avatar } from "@mui/material";
 import React from "react";
+import { Navigate, useNavigate } from "react-router-dom";
+import { danger, isOrganization } from "../services/auth";
 import ListOfOrgan from "./listOfOrgan";
 import ListOfPost from "./listOfPost";
 import ListOfUsers from "./listOfUsers";
 import OrganSideBar from "./organSideBar";
 
 export default function OrganHome(){
+    const navigate = useNavigate();
+    if(!isOrganization()){
+        danger();
+        navigate("/");
+    }
+    else
     return(
         <div className="container-fluid">
         <div className="row">
