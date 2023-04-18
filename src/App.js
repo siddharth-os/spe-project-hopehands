@@ -25,7 +25,7 @@ function App() {
         <Route path="/admin/organisation/:id" element={<OrganInfoCard/>}/>
         <Route path="/organisation/home" element={<OrganHome/>}/>
         <Route path="/organisation/add/post" element={<AddPost/>}/>
-        <Route path="/organisation/post/:id" element={<OrganPost/>}/>
+        <Route path="/organisation/post/:title/:id" element={<OrganPost/>}/>
         <Route path="/user/home" element={<UserHome/>}/>
         <Route path="/logout" element={<Logout/>}/>
         </Routes>

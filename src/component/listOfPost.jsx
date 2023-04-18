@@ -48,7 +48,7 @@ export default function ListOfPost() {
                 <tr>
                   <td>{index+1}</td>
                   <td>{ele.title}</td>
-                  <td><Link to={`/organisation/post/${posts[index].pid}`}>More Info</Link></td>
+                  <td><Link to={`/organisation/post/${ele.title}/${posts[index].pid}`}>More Info</Link></td>
                 </tr>
               );
             })}

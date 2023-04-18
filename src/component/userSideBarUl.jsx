@@ -14,7 +14,7 @@ export default function UserSideBarUl() {
         </a>
       </li>
       <li className="nav-item">
-        <a className="nav-link text-light" href="#">
+        <a className="nav-link text-light" href="/logout">
         <i class="fa-solid fa-right-from-bracket"></i> Logout
         </a>
       </li>

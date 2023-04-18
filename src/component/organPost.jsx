@@ -10,22 +10,8 @@ import ListOfUsers from "./listOfUsers";
 import OrganSideBar from "./organSideBar";
 
 export default function OrganPost(){
-    const [users,setUsers]=useState([]);
-    const {id} = useParams();
+    const {id,title} = useParams();
     const navigate= useNavigate();
-    useEffect(()=>{
-        const fetchData = async()=>{
-            const token = getToken();
-            try {
-                const res = await axios.post(url+"/get/likeduser/"+id,{},{headers:{'Authorization':token}});
-                console.log(res.data);
-            } catch (error) {
-                console.log(error);
-                navigate("/");
-            }
-        }
-        fetchData();
-    },[])
     if(!isOrganization()){
         danger();
         navigate("/");
@@ -35,8 +21,8 @@ export default function OrganPost(){
         <div className="row">
             <OrganSideBar/>
             <div className="col-md-10 bg-light">
-                <h2>Post Title</h2>
-                <InterestList/>
+                <h2>{title}</h2>
+                <InterestList pid={id}/>
             </div>
         </div>
     </div>

@@ -1,7 +1,25 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { getToken, url } from "../services/auth";
 
 export default function ListOfUsers() {
-    const l=[1,21,1,1,1,1,1,1,1,1,1];
+    const [listUsers,setListUsers]=useState([]);
+    const navigate = useNavigate("");
+    useEffect(()=>{
+        const fetchList = async()=>{
+            const token = getToken();
+            try {
+                const res = await axios.post(url+"/users/getall",{},{headers:{'Authorization':token}});
+                // console.log(res.data);
+                setListUsers(res.data);
+            } catch (error) {
+                console.log(error);
+                navigate("/");
+            }
+        }
+        fetchList();
+    },[])
   return (
     <div className="col-md-10 " style={{ margin: "1rem auto" }}>
       <h2
@@ -18,19 +36,21 @@ export default function ListOfUsers() {
         <table class="table table-bordered">
           <thead>
             <tr>
-              <th>Id</th>
-              <th>Name</th>
+              <th>#</th>
+              <th>Uid</th>
               <th>Email</th>
-              <th>More Info</th>
+              <th>Mobile</th>
+              <th>Address</th>
             </tr>
           </thead>
           <tbody>
-            {l.map((ele,index)=>{
+            {listUsers.map((ele,index)=>{
                 return(<tr>
-                    <td>D11{index+1}</td>
-                    <td>Pankaj Mahashaya</td>
-                    <td>mail@mail.com</td>
-                    <td><a href="#">More Info</a></td>
+                    <td>{index+1}</td>
+                    <td>{ele.uid}</td>
+                    <td>{ele.email}</td>
+                    <td>{ele.mobile}</td>
+                    <td>{ele.address}</td>
                   </tr>)
             })}
           </tbody>
