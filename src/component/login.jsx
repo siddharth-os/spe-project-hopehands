@@ -39,8 +39,10 @@ export default function Login() {
     })
     if(result.status===200){
       console.log("successfully loggedIn");
-      localStorage.setItem('jwtToken',result.data);
+      console.log(result.data);
+      localStorage.setItem('jwtToken',result.data.token);
       localStorage.setItem('authRole',role);
+      localStorage.setItem('id',result.data.id);
       if(role===0){
         navigate("/admin/home");
       }
