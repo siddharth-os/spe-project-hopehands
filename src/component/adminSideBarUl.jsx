@@ -5,22 +5,22 @@ export default function AdminSideBarUl() {
     <ul className="nav flex-column mt-5">
       <li className="nav-item">
         <a className="nav-link text-light" href="/admin/home">
-        <i class="fa-solid fa-desktop"></i> DashBoard
+        <i className="fa-solid fa-desktop"></i> DashBoard
         </a>
       </li>
       <li className="nav-item">
         <a className="nav-link text-light" href="/admin/organisation/register">
-        <i class="fa-solid fa-plus"></i> Add Organisation
+        <i className="fa-solid fa-plus"></i> Add Organisation
         </a>
       </li>
       <li className="nav-item">
         <a className="nav-link text-light" href="#">
-        <i class="fa-solid fa-gear"></i> Settings
+        <i className="fa-solid fa-gear"></i> Settings
         </a>
       </li>
       <li className="nav-item">
-        <a className="nav-link text-light" href="#">
-        <i class="fa-solid fa-right-from-bracket"></i> Logout
+        <a className="nav-link text-light" href="/logout">
+        <i className="fa-solid fa-right-from-bracket"></i> Logout
         </a>
       </li>
     </ul>

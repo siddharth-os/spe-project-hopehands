@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { danger, getToken, isAdmin, url } from "../services/auth";
 import AdminSideBar from "./adminSidebar";
 
 export default function OrganisationRegister() {
@@ -7,13 +10,37 @@ export default function OrganisationRegister() {
   const [mobile, setMobile] = useState("");
   const [address, setAddress] = useState("");
   const [uid, setUid] = useState("");
-
-  const handleSubmit = (e) => {
+  const navigate = useNavigate("");
+  useEffect(()=>{
+    if(!isAdmin()){
+      navigate("/");
+    }
+  },[])
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    const password = name + mobile.substring(0, 4);
-    const creds = { name, email, mobile, uid, address, password };
-    console.log(creds);
+    const password = "123";
+    // const data = {username:name, email, mobile, lic:uid, address, password };
+    try {
+      const token = getToken();
+      const config = {headers:{'Authorization':token}}
+      const res = await axios.post(url+'/org/register',{username:name,password,role:1},config);
+      if(res){
+        const oid = res.data;
+        const result = await axios.post(url+"/org/savedetail",{oid,email,mobile,address,lic:uid},config);
+        alert("Saved Successfully");
+        navigate("/admin/home");
+      }
+    } catch (error) {
+      console.log(error);
+      navigate("/admin/home");
+    }
+
   };
+  if(!isAdmin()){
+    danger();
+    navigate("/");
+  }
+  else
   return (
     <div className="container-fluid">
       <div className="row">

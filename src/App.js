@@ -11,6 +11,7 @@ import Footer from './component/footer';
 import OrganHome from './component/organHome';
 import OrganPost from './component/organPost';
 import UserHome from './component/userHome';
+import Logout from './component/logout';
 function App() {
   return (
     <div className="App">
@@ -26,6 +27,7 @@ function App() {
         <Route path="/organisation/add/post" element={<AddPost/>}/>
         <Route path="/organisation/post/id" element={<OrganPost/>}/>
         <Route path="user/home" element={<UserHome/>}/>
+        <Route path="/logout" element={<Logout/>}/>
         </Routes>
       </Router>
       <Footer/> 

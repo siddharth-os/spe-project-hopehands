@@ -1,22 +1,51 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Select from "@mui/material/Select";
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
+import axios from "axios";
+import { getToken, isAdmin, isOrganization, isUser, url } from "../services/auth";
 export default function Login() {
   const [role, setrole] = useState("");
   const [username,setUsername] = useState("");
   const [password,setPassword]=  useState("");
+  const navigate = useNavigate("");
+  
+  useEffect(()=>{
+    if(isAdmin()){
+      navigate("/admin/home");
+    }
+    else if(isOrganization()){
+      navigate("/organisation/home");
+    }
+    else if(isUser()){
+      navigate("/user/home");
+    }
+  },[])
+
   const handleChangeSelect = (event) => {
     event.preventDefault();
     setrole(event.target.value);
     console.log(event.target.value);
   };
-  const handleSubmit = (e)=>{
+  const handleSubmit = async (e)=>{
     e.preventDefault();
-    const cred = {role,username};
-    console.log(cred);
+    const data={username:username,password:password,role:role};
+    const result = await axios.post(url+"/admin/authenticate",data)
+    .catch((error)=>{
+      alert("Error Encountered.");
+      navigate("/");
+    })
+    if(result.status===200){
+      console.log("successfully loggedIn");
+      localStorage.setItem('jwtToken',result.data);
+      localStorage.setItem('authRole',role);
+      navigate("/admin/home");
+    }
+    else{
+      console.log("herer");
+    }
   }
   return (
     <div
@@ -54,10 +83,10 @@ export default function Login() {
           <TextField
             id="outlined-basic"
             label="Password"
-            type={"password"}
             variant="outlined"
+            type={"password"}
             value={password}
-            onChange={(e)=>{setPassword(e.target.password)}}
+            onChange={(e)=>{setPassword(e.target.value)}}
             fullWidth
           />
           <button

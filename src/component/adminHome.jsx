@@ -1,11 +1,39 @@
 import { Avatar } from "@mui/material";
-import React from "react";
+import { getConfig } from "@testing-library/react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { danger, getToken, isAdmin, url } from "../services/auth";
 import AdminSideBar from "./adminSidebar";
 import AdminSideBarUl from "./adminSideBarUl";
 import ListOfOrgan from "./listOfOrgan";
 import ListOfUsers from "./listOfUsers";
 
 export default function AdminHome(){
+    const [numOrgs,setNumOrgs]=useState("");
+    const [listOrgs,setListOrgs]=useState([]);
+    const navigate = useNavigate("");
+    useEffect(()=>{
+        const fetchList = async()=>{
+            const token = getToken();
+            try {
+                const res = await (await axios.post(url+"/org/getall",{},{headers:{'Authorization':token}}));
+                // console.log(res.data);
+                setListOrgs(res.data);
+                setNumOrgs(res.data.length);
+            } catch (error) {
+                console.log(error);
+                navigate("/");
+            }
+        }
+        fetchList();
+    },[])
+    if(!isAdmin()){
+        danger();
+        console.log("Admin not Authenticated");
+        navigate("/");
+    }
+    else
     return(
         <div className="container-fluid">
         <div className="row">
@@ -16,7 +44,7 @@ export default function AdminHome(){
                         <div className="col-md-4">
                             <div className="card">
                                 <div className="card-body">
-                                    <h1 className="card-title">22</h1>
+                                    <h1 className="card-title">{numOrgs}</h1>
                                     <p className="card-text">Total Number of Organisations.</p>
                                 </div>
                             </div>
