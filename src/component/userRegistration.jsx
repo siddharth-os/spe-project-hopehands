@@ -1,16 +1,31 @@
+import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { url } from "../services/auth";
 
 export default function UserRegistration() {
     const [name,setName] = useState("");
     const [email,setEmail]=useState("");
     const [mobile,setMobile]=useState("");
     const [address,setAddress]=useState("");
-
-    const handleSubmit = (e)=>{
+    const navigate = useNavigate();
+    const handleSubmit = async (e)=>{
         e.preventDefault();
-        const password = name+mobile.substring(0,4);
-        const creds={name,email,mobile,address,password};
-        console.log(creds);
+        const password = "123";
+        // const d={name,email,mobile,address,password};
+        const res = await axios.post(url+"/user/register",{username:name,password,role:2});
+        if(res){
+          const id = res.data;
+          const res2 = await axios.post(url+"/user/savedetail",{uid:id,name,email,mobile,address});
+          if(res2){
+            alert("User Added successfully.");
+            navigate("/");
+          }
+          else{
+            alert("Error Encountered");
+            navigate("/user/registration");
+          }
+        }
     }
   return (
     <div className="col-md-4" style={{margin:"1rem auto",boxShadow:"5px 5px 5px 5px pink"}}>

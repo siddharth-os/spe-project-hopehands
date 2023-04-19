@@ -26,7 +26,7 @@ export default function OrganisationRegister() {
       const res = await axios.post(url+'/org/register',{username:name,password,role:1},config);
       if(res){
         const oid = res.data;
-        const result = await axios.post(url+"/org/savedetail",{oid,email,mobile,address,lic:uid},config);
+        const result = await axios.post(url+"/org/savedetail",{oid,name,email,mobile,address,lic:uid},config);
         alert("Saved Successfully");
         navigate("/admin/home");
       }

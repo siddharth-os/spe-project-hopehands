@@ -37,7 +37,7 @@ export default function ListOfOrgan() {
           <thead>
             <tr>
               <th>#</th>
-              <th>Oid</th>
+              <th>Name</th>
               <th>Email</th>
               <th>More Info</th>
             </tr>
@@ -46,7 +46,7 @@ export default function ListOfOrgan() {
             {listOrgs.map((ele,index)=>{
                 return(<tr>
                     <td>{index+1}</td>
-                    <td>{ele.oid}</td>
+                    <td>{ele.name}</td>
                     <td>{ele.email}</td>
                     <td><Link to={`/admin/organisation/${listOrgs[index].oid}`}>More Info</Link></td>
                   </tr>)
