@@ -1,13 +1,34 @@
 import axios from "axios";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { getToken, url } from "../services/auth";
 
 export default function PostTimeline(props) {
   const {oid,pid,title,detail,date}=props;
-  const handleClick = async (e)=>{
+  const uid = localStorage.getItem('id');
+  const navigate = useNavigate();
+  const [isLike,SetIsLike]=useState(false);
+
+  useEffect(()=>{
+
+    const fetchData = async ()=>{
+      try {
+        const token = getToken();
+        const res = await axios.post(url+"/like/user",{pid:pid,uid:uid},{headers:{'Authorization':token}});
+        SetIsLike(res.data);
+        console.log(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData();
+  },[])
+  const handleClick = async ()=>{
     const token = getToken();
-    const res = await axios.post(url+"/like/"+pid,{},{headers:{'Authorization':token}});
-    console.log(res.data);
+    const baseUrl = isLike===false?"/like/":"/unlike/";
+    const res = await axios.post(url+baseUrl+pid,{},{headers:{'Authorization':token}});
+    // navigate("/user/home");
+    window.location.reload(true);
   }
   return (
     <div className="row" style={{ display: "flex", justifyContent: "center" }}>
@@ -32,7 +53,7 @@ export default function PostTimeline(props) {
         </p>
         <button className="btn btn-dark" style={{ width: "100%" }} onClick={handleClick}>
           {/* {" "} */}
-          <i className="fa-solid fa-heart"></i> Love
+          <i className="fa-solid fa-heart"></i> Love{isLike===true ? <mytag>d</mytag>:<mytag></mytag>}
         </button>
       </div>
       <hr style={{width:"50%",marginTop:"1rem"}}/>

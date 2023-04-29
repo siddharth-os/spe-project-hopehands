@@ -37,7 +37,6 @@ export default function ListOfUsers() {
           <thead>
             <tr>
               <th>#</th>
-              <th>Uid</th>
               <th>Email</th>
               <th>Mobile</th>
               <th>Address</th>
@@ -47,7 +46,6 @@ export default function ListOfUsers() {
             {listUsers.map((ele,index)=>{
                 return(<tr>
                     <td>{index+1}</td>
-                    <td>{ele.uid}</td>
                     <td>{ele.email}</td>
                     <td>{ele.mobile}</td>
                     <td>{ele.address}</td>
