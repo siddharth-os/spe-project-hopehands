@@ -11,7 +11,7 @@
         - docker
     - name: Copy Docker Compose file
       copy:
-        src: proj1/docker-compose.yml
+        src: docker-compose.yml
         dest: /opt/docker-compose.yml
       tags:
         - docker
