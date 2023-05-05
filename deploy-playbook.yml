@@ -1,0 +1,27 @@
+---
+- name: Deploy Docker Compose for Spring Boot and MySQL
+  hosts: all
+  become: true
+  tasks:
+    - name: Install Docker Compose
+      apt:
+        name: docker-compose
+        state: present
+      tags:
+        - docker
+    - name: Copy Docker Compose file
+      copy:
+        src: proj1/docker-compose.yml
+        dest: /opt/docker-compose.yml
+      tags:
+        - docker
+
+    - name: Deploy Docker Compose
+      docker_compose:
+        project_src: /opt
+        project_name: springboot_mysql
+        files:
+          - docker-compose.yml
+        state: present
+      tags:
+        - docker

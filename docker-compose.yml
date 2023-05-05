@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  mysqldb:
+    platform: linux/x86_64
+    image: mysql
+    container_name: mysqldb
+    restart: always
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: spemajor
+    ports:
+      - "3307:3306"
+
+  spring-app:
+    image: siddharth4244/spebackend
+    restart: always
+    ports:
+      - "8081:8081"
+    depends_on:
+      - mysqldb
+  reactjs:
+    image: siddharth4244/spemajor
+    ports:
+      - "3000:3000"
