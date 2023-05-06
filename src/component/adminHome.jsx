@@ -17,6 +17,7 @@ export default function AdminHome(){
     const [likes,setLikes]=useState("");
     const navigate = useNavigate("");
     useEffect(()=>{
+        if(isAdmin()){
         const fetchList = async()=>{
             const token = getToken();
             try {
@@ -37,6 +38,11 @@ export default function AdminHome(){
             }
         }
         fetchList();
+    }
+    else{
+        danger();
+        navigate("/");
+    }
     },[])
     if(!isAdmin()){
         danger();

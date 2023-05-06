@@ -75,6 +75,7 @@ export default function Login() {
             value={role}
             label="role"
             onChange={handleChangeSelect}
+            required
             fullWidth
           >
             <MenuItem value={0}>Admin</MenuItem>
@@ -89,6 +90,7 @@ export default function Login() {
             value={username}
             onChange={(e)=>{setUsername(e.target.value)}}
             fullWidth
+            required
           />
           <TextField
             id="outlined-basic"
@@ -98,6 +100,7 @@ export default function Login() {
             value={password}
             onChange={(e)=>{setPassword(e.target.value)}}
             fullWidth
+            required
           />
           <button
             className="btn"

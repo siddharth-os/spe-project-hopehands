@@ -8,11 +8,11 @@ export default function UserSideBarUl() {
         <i class="fa-solid fa-desktop"></i> Timeline
         </a>
       </li>
-      <li className="nav-item">
+      {/* <li className="nav-item">
         <a className="nav-link text-light" href="#">
         <i class="fa-solid fa-gear"></i> Settings
         </a>
-      </li>
+      </li> */}
       <li className="nav-item">
         <a className="nav-link text-light" href="/logout">
         <i class="fa-solid fa-right-from-bracket"></i> Logout

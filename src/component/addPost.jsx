@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getToken, url } from "../services/auth";
+import { danger, getToken, isOrganization, url } from "../services/auth";
 import OrganSideBar from "./organSideBar";
 
 export default function AddPost() {
@@ -9,6 +9,12 @@ export default function AddPost() {
   const [imageUrl, setimageUrl] = useState("");
   const [detail, setDetail] = useState("");
   const navigate = useNavigate();
+  useEffect(()=>{
+    if(!isOrganization()){
+      danger();
+      navigate("/");
+    }
+  },[])
   const handleSubmit = async (e) => {
     e.preventDefault();
     const token = getToken();
@@ -52,6 +58,7 @@ export default function AddPost() {
                 onChange={(e) => {
                   setTitle(e.target.value);
                 }}
+                required
               />
             </div>
             <div class="form-group">
@@ -78,6 +85,7 @@ export default function AddPost() {
                 onChange={(e) => {
                   setDetail(e.target.value);
                 }}
+                required
               ></textarea>
             </div>
             <button

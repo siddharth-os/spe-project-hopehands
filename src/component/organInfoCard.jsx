@@ -1,13 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getToken, url } from "../services/auth";
+import { danger, getToken, isAdmin, url } from "../services/auth";
 import AdminSideBar from "./adminSidebar";
 export default function OrganInfoCard() {
   const {id}=useParams();   
   const [details,setDetails]=useState({});
   const navigate = useNavigate("");
   useEffect(()=>{
+    if(isAdmin()){
     const fetchDetails = async ()=>{
       const token = getToken();
       try {
@@ -19,6 +20,11 @@ export default function OrganInfoCard() {
       }
     }
     fetchDetails();
+  }
+  else{
+    danger();
+    navigate("/");
+  }
   },[]);
   const liStyle={textAlign:"left"}
   return (

@@ -14,6 +14,7 @@ export default function OrganHome(){
     const [likes,setLikes]=useState("");
 
     useEffect(()=>{
+        if(isOrganization()){
         const fetchData = async()=>{
             const token = getToken();
             try {
@@ -28,6 +29,11 @@ export default function OrganHome(){
             }
         }
         fetchData();
+    }
+    else{
+        danger();
+        navigate("/");
+    }
     },[])
     if(!isOrganization()){
         danger();

@@ -12,10 +12,12 @@ import OrganSideBar from "./organSideBar";
 export default function OrganPost(){
     const {id,title} = useParams();
     const navigate= useNavigate();
-    if(!isOrganization()){
-        danger();
-        navigate("/");
-    }
+    useEffect(()=>{
+        if(!isOrganization()){
+            danger();
+            navigate("/");
+        }
+    },[])
     return(
         <div className="container-fluid">
         <div className="row">

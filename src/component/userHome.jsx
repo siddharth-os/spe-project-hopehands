@@ -16,6 +16,7 @@ export default function UserHome() {
     const [postsList,setPostsList]=useState([]);
     const [name,setName]=useState("");
     useEffect(()=>{
+        if(isUser()){
         const fetchData = async()=>{
             const token = getToken();
             try {
@@ -28,6 +29,11 @@ export default function UserHome() {
             }
         }
         fetchData();
+      }
+      else{
+        danger();
+        navigate("/");
+      }
     },[])
   if(!isUser()){
     danger();

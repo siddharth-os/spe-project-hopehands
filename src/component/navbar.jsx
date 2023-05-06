@@ -3,7 +3,7 @@ import React from "react";
 export default function NavbarBoot() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-dark" style={{padding:"1rem"}}>
-      <a className="navbar-brand" href="#" style={{fontSize:"2rem",fontFamily: "'Rubik Vinyl', cursive",fontFamily: "'Tilt Prism', cursive",color:"white"}}>
+      <a className="navbar-brand" href="/" style={{fontSize:"2rem",fontFamily: "'Rubik Vinyl', cursive",fontFamily: "'Tilt Prism', cursive",color:"white"}}>
       <i class="fa-solid fa-hand-holding-heart"></i>  HopeHands
       </a>
       <button
@@ -20,7 +20,7 @@ export default function NavbarBoot() {
       <div className="collapse navbar-collapse" id="navbarNav" style={{paddingLeft:"2rem"}}>
         <ul className="navbar-nav">
           <li className="nav-item active">
-            <a className="nav-link" href="#" style={{color:"#F3E8FF",fontSize:"1.1rem"}}>
+            <a className="nav-link" href="/" style={{color:"#F3E8FF",fontSize:"1.1rem"}}>
               Home
             </a>
           </li>

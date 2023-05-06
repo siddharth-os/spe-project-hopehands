@@ -13,11 +13,11 @@ export default function AdminSideBarUl() {
         <i className="fa-solid fa-plus"></i> Add Organisation
         </a>
       </li>
-      <li className="nav-item">
+      {/* <li className="nav-item">
         <a className="nav-link text-light" href="#">
         <i className="fa-solid fa-gear"></i> Settings
         </a>
-      </li>
+      </li> */}
       <li className="nav-item">
         <a className="nav-link text-light" href="/logout">
         <i className="fa-solid fa-right-from-bracket"></i> Logout

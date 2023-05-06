@@ -13,6 +13,7 @@ export default function OrganisationRegister() {
   const navigate = useNavigate("");
   useEffect(()=>{
     if(!isAdmin()){
+      danger();
       navigate("/");
     }
   },[])
@@ -69,6 +70,7 @@ export default function OrganisationRegister() {
                 onChange={(e) => {
                   setName(e.target.value);
                 }}
+                required
               />
             </div>
             <div class="form-group">
@@ -82,6 +84,7 @@ export default function OrganisationRegister() {
                 onChange={(e) => {
                   setEmail(e.target.value);
                 }}
+                required
               />
             </div>
             <div class="form-group">
@@ -95,6 +98,7 @@ export default function OrganisationRegister() {
                 onChange={(e) => {
                   setUid(e.target.value);
                 }}
+                required
               />
             </div>
             <div class="form-group">
@@ -108,6 +112,7 @@ export default function OrganisationRegister() {
                 onChange={(e) => {
                   setMobile(e.target.value);
                 }}
+                required
               />
             </div>
             <div class="form-group">
@@ -121,6 +126,7 @@ export default function OrganisationRegister() {
                 onChange={(e) => {
                   setAddress(e.target.value);
                 }}
+                required
               ></textarea>
             </div>
             <button
