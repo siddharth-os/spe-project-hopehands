@@ -33,7 +33,8 @@ export default function UserHome() {
       else{
         danger();
         navigate("/");
-        // console.log("hello");
+        console.log("hello");
+        
       }
     },[])
   if(!isUser()){
