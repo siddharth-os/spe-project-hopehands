@@ -6,6 +6,7 @@ export default function NavbarBoot() {
       <a className="navbar-brand" href="/" style={{fontSize:"2rem",fontFamily: "'Rubik Vinyl', cursive",fontFamily: "'Tilt Prism', cursive",color:"white"}}>
       <i class="fa-solid fa-hand-holding-heart"></i>  HopeHands
       </a>
+      {/* kasjbfakjsbf */}
       <button
         className="navbar-toggler"
         type="button"
