@@ -1,0 +1,65 @@
+pipeline {
+    environment {
+        DOCKERHUB_REGISTRY = "siddharth4244/spemajor"
+        DOCKERHUB_CREDENTIALS = credentials('docker-creds-1')
+   
+    }
+    agent any
+
+    stages {
+        stage('Pull code') {
+            steps {
+                // credentials are requisred because its a private repository
+                git url: 'https://github.com/siddharth-os/spe-project-hopehands.git',
+                branch: 'main',
+                credentialsId: 'gh-sid'
+            }
+        }
+        stage('Test App') {
+            environment {
+                PATH = "$PATH:/usr/local/bin"
+            }
+            steps {
+                sh 'npm install'
+                sh 'npm run test'
+            }
+        }
+        stage('Build React App') {
+            environment {
+                PATH = "$PATH:/usr/local/bin"
+            }
+            steps {
+                sh 'npm run build'
+            }
+        }
+        // test file
+        stage('Build Docker Image') {
+			steps {
+				sh "docker build -t $DOCKERHUB_REGISTRY:latest ."
+			}
+		}
+       
+    stage('Login to Docker Hub') {
+        steps {
+        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+        }
+    }
+    stage('Push Docker Image to Docker Hub') {
+			steps {
+				sh 'docker push $DOCKERHUB_REGISTRY:latest'
+			}
+		}
+        
+    stage('Removing Docker Image from Local') {
+            steps {
+                sh "docker rmi $DOCKERHUB_REGISTRY:latest"
+            }
+        }
+    stage('Ansible Playbook runn') {
+            steps {
+                sh 'export LANG=en_US.UTF-8;ansible-playbook deploy-playbook.yml --extra-vars "ansible_sudo_pass=here_pwsrd"'
+                // sh 'cat -n deploy-playbook.yml'
+            }
+        }
+}
+}
